@@ -1,0 +1,6 @@
+var config_local = {};
+
+config_local.host = "api.opendatatn.local";
+config_local.port = 5984;
+
+module.exports = config_local;
