@@ -1,6 +1,3 @@
-var config = {};
-
-config.host = "api.opendatatn.org";
-config.port = 80;
+var config = require ('../../config/config.js');
 
 module.exports = config;

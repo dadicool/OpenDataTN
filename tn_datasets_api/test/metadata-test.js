@@ -3,7 +3,7 @@ var assert = require('assert');
 var APIeasy = require('api-easy');
 var config = require('./config.js');
 var metadata = require('./fixtures/metadata.js')
-
+console.log(config);
 
 var suite = APIeasy.describe('tn_datasets_api');
 
