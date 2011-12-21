@@ -1,3 +1,14 @@
+//////////////////////////////////////////////////////////////////////////////////
+//
+//  Template file for local configs
+//  
+//  1 - Copy this file into config_local.js to enable the local api dev endpoint
+//  2 - Add api.opendatatn.local to your /etc/hosts file as an alias for 127.0.0.1
+//  3 - If you used any non-standard settings or you want to add some local config 
+//      settings, add them here
+//
+//////////////////////////////////////////////////////////////////////////////////
+
 var config_local = {};
 
 config_local.host = "api.opendatatn.local";
