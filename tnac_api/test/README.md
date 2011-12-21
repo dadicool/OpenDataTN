@@ -8,23 +8,20 @@ Prequisties:
 Install:
 -------
 
-run the install command on the current folder:
+- Go to the root of the repo (where package.json lives)
+- run the install command on the current folder:
     
+    $ npm install -g vows
     $ npm install
-
-add ./node_modules/.bin to your PATH
 
 Run:
 ---
 
 run individual tests, for example:
 
-    $ vows metadata-test.js
+    $ vows tnac-api-test.js
 
 or run all the tests:
 
-    $ npm test
-
-this is equivalent to:
-
     $ vows *-test.js
+
