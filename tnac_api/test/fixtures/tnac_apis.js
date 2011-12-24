@@ -2,10 +2,9 @@ var apis = {"apis" :
              [
                {"version" : 
                 "v1", "endpoints" :
-                   [ "circonscription",
-                     "delegation",
-                     "centre",
-                     "bureau"
+                   [ "meta-all",
+                     "meta",
+                     "vote"
                    ]
                }
              ]

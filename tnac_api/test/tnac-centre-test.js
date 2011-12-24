@@ -15,8 +15,8 @@ var suite = APIeasy.describe('tnac_centre');
 
 suite.use(config.host, config.port)
     .discuss('When asking for the list of bureaux')
-    .path('/tnac/v1')
-    .get('/centre/'+ circ_test_id + '/' + deleg_test_id + '/' + centre_test_id)
+    .path('/tnac/v1/meta')
+    .get('/'+ circ_test_id + '/' + deleg_test_id + '/' + centre_test_id)
     .expect(200)
     .expect('should respond with at least one bureau', function (err, res, body) {
         fn_utils.checkAtLeastOneEntry(err, res, body, 'bureaux');

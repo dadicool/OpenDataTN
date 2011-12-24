@@ -5,7 +5,7 @@ var version = "v1";
 
 module.exports = [
     {from: version + '/vote/:circonscription/:delegation/:centre_vote/:bureau_vote', 
-     to: '_list/bureau_json/bureau_vote',
+     to: '_list/bureau_vote_json/bureau_vote',
      query: { 
        'include_docs' : 'true',
        'key' : [
@@ -61,6 +61,18 @@ module.exports = [
        'group' : 'true'
      } 
     },
+    {from: version + '/meta/:circonscription/:delegation/:centre_vote/:bureau_vote', 
+     to: '_list/bureau_meta_json/bureau_vote',
+     query: { 
+       'include_docs' : 'true',
+       'key' : [
+         ":bureau_vote",
+         ":centre_vote",
+         ":delegation",
+         ":circonscription"
+       ]
+     }
+    },
     {from: version + '/meta/:circonscription/:delegation/:centre_vote', 
      to: '_list/centre_json/centre_vote',
      query: { 
@@ -107,6 +119,12 @@ module.exports = [
      } 
     },
     {from: version + '/meta', 
+     to: '_list/all_circonscription_json/all_circonscription',
+     query: { 
+       'group' : 'true'
+     } 
+    },
+    {from: version + '/meta-all', 
      to: '_list/all_bureau_json/bureau_vote'
     },
     {from: version + '/liste', 

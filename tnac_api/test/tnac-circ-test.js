@@ -13,8 +13,8 @@ var suite = APIeasy.describe('tnac_circonscription');
 
 suite.use(config.host, config.port)
     .discuss('When asking for the list of circonscriptions')
-    .path('/tnac/v1')
-    .get('/circonscription')
+    .path('/tnac/v1/meta')
+    .get('/')
     .expect(200)
     .expect('should respond with at least one circonscription', function (err, res, body) {
         fn_utils.checkAtLeastOneEntry(err, res, body, 'circonscriptions');
@@ -27,7 +27,7 @@ suite.use(config.host, config.port)
     })
     .undiscuss()
     .discuss('When asking for a specific circonscription')
-    .get('/circonscription/' + circ_test_id)
+    .get('/' + circ_test_id)
     .expect(200)
     .expect('should respond with at least delegation', function (err, res, body) {
         fn_utils.checkAtLeastOneEntry(err, res, body, 'delegations');

@@ -50,17 +50,29 @@ var fn_tojson_format = function(index1, index2, array_name, element_name, name1,
 };
 
 module.exports = {
-    'bureau_json' : function (head,req) {
+    'bureau_vote_json' : function (head,req) {
       fn_setcharset();
       var row = getRow(); 
-      delete row.doc._id; 
-      delete row.doc._rev;
       var listes = row.doc.resultat.listes;
       var sorted_listes = listes.sort(function (a,b) {
                                         return b.vote - a.vote;
                                       }
                                     );
       row.doc.resultat.listes = sorted_listes;
+      delete row.doc._id;
+      delete row.doc._rev;
+      delete row.doc.circonscription;
+      delete row.doc.delegation;
+      delete row.doc.centre_vote;
+      delete row.doc.bureau_vote;
+      send (toJSON(row.doc));
+    },
+    'bureau_meta_json' : function (head,req) {
+      fn_setcharset();
+      var row = getRow(); 
+      delete row.doc._id;
+      delete row.doc._rev;
+      delete row.doc.resultat;
       send (toJSON(row.doc));
     },
     'centre_json' : function (head,req) {
