@@ -4,7 +4,7 @@
 var version = "v1";
 
 module.exports = [
-    {from: version + '/bureau/:circonscription/:delegation/:centre_vote/:bureau_vote', 
+    {from: version + '/vote/:circonscription/:delegation/:centre_vote/:bureau_vote', 
      to: '_list/bureau_json/bureau_vote',
      query: { 
        'include_docs' : 'true',
@@ -16,7 +16,52 @@ module.exports = [
        ]
      } 
     },
-    {from: version + '/centre/:circonscription/:delegation/:centre_vote', 
+    {from: version + '/vote/:circonscription/:delegation/:centre_vote', 
+     to: '_list/agg_json/agg_centre',
+     query: { 
+       'startkey' : [
+         ":circonscription",
+         ":delegation",
+         ":centre_vote"
+       ],
+       'endkey' : [
+         ":circonscription",
+         ":delegation",
+         ":centre_vote",
+         {}
+       ],
+       'group' : 'true'
+     } 
+    },
+    {from: version + '/vote/:circonscription/:delegation', 
+     to: '_list/agg_json/agg_delegation',
+     query: { 
+       'startkey' : [
+         ":circonscription",
+         ":delegation"
+       ],
+       'endkey' : [
+         ":circonscription",
+         ":delegation",
+         {}
+       ],
+       'group' : 'true'
+     } 
+    },
+    {from: version + '/vote/:circonscription', 
+     to: '_list/agg_json/agg_circonscription',
+     query: { 
+       'startkey' : [
+         ":circonscription"
+       ],
+       'endkey' : [
+         ":circonscription",
+         {}
+       ],
+       'group' : 'true'
+     } 
+    },
+    {from: version + '/meta/:circonscription/:delegation/:centre_vote', 
      to: '_list/centre_json/centre_vote',
      query: { 
        'startkey' : [
@@ -33,7 +78,7 @@ module.exports = [
        'group' : 'true'
      }
     },
-    {from: version + '/delegation/:circonscription/:delegation', 
+    {from: version + '/meta/:circonscription/:delegation', 
      to: '_list/delegation_json/delegation',
      query: { 
        'startkey' : [
@@ -48,7 +93,7 @@ module.exports = [
        'group' : 'true'
      } 
     },
-    {from: version + '/circonscription/:circonscription', 
+    {from: version + '/meta/:circonscription', 
      to: '_list/circonscription_json/circonscription',
      query: { 
        'group' : 'true',
@@ -61,11 +106,8 @@ module.exports = [
        ]
      } 
     },
-    {from: version + '/circonscription', 
-     to: '_list/all_circonscription_json/all_circonscription',
-     query: { 
-       'group' : 'true'
-     } 
+    {from: version + '/meta', 
+     to: '_list/all_bureau_json/bureau_vote'
     },
     {from: version + '/liste', 
      to: '_list/all_liste_json/all_listes',

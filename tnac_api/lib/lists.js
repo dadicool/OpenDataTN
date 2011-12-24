@@ -2,12 +2,34 @@
  * List functions to be exported from the design doc.
  */
 
+//require ('assert');
+
 var fn_setcharset = function() {
       start({
            "headers": {
              "Content-Type": "text/plain;charset=utf-8" 
             }
       }); 
+};
+
+var fn_build_result_list = function(rtn, key, value) {
+      // Given that rtn is an object, the changes below are gonna be reflected in the variable passed in here
+      var name = '';
+      var key_length = key.length;
+      if (key_length >= 2 ) {
+          // There is a circonscription field and a list name
+          name = 'circonscription';
+          rtn[name] = key[0];
+      }
+      if (key_length >= 3) {
+          name = 'delegation';
+          rtn[name] = key[1];
+      }
+      if (key_length >= 4) {
+          name = 'centre';
+          rtn[name] = key[2];
+      }
+      rtn['resultat']['listes'].push({'name' : key[key_length - 1], 'vote': value});
 };
 
 var fn_tojson_format = function(index1, index2, array_name, element_name, name1, name2) {
@@ -95,6 +117,21 @@ module.exports = {
         rtn[value[3]][value[2]] = typeof(rtn[value[3]][value[2]]) != 'undefined' ? rtn[value[3]][value[2]] : {};
 
         rtn[value[3]][value[2]][value[1]] = value[0]; 
+      } 
+      send (toJSON(rtn));
+    },
+    'agg_json' : function (head,req) {
+      fn_setcharset();
+      var rtn = {};
+      rtn['resultat'] = {};
+      rtn['resultat']['listes'] = [];
+      
+      while(row = getRow()) { 
+        var key = row.key;
+        log("key = " + key);
+	if (typeof(key) === "object" && Array.isArray(key)) {
+            fn_build_result_list(rtn, key, row.value );
+        }
       } 
       send (toJSON(rtn));
     }

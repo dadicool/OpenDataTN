@@ -35,7 +35,7 @@ module.exports = {
        }
      },
      'reduce' : function (key, values) {
-       return sum(values);
+       return true;
      }
    },
    'delegation' : {
@@ -58,7 +58,7 @@ module.exports = {
        }
      },
      'reduce' : function (key, values) {
-       return sum(values);
+       return true;
      }
    },
    'centre_vote' : {
@@ -84,7 +84,7 @@ module.exports = {
        }
      },
      'reduce' : function (key, values) {
-       return sum(values);
+       return true;
      }
    },
    'bureau_vote' : {
@@ -126,10 +126,10 @@ module.exports = {
                    doc.resultat.listes[i].vote) {
                      emit([
                        doc.resultat.listes[i].name,
-                       doc.bureau_vote.code, 
-                       doc.centre_vote.code, 
+                       doc.circonscription.code,
                        doc.delegation.code, 
-                       doc.circonscription.code
+                       doc.centre_vote.code, 
+                       doc.bureau_vote.code
                        ], 
                        doc.resultat.listes[i].vote
                      );
@@ -157,6 +157,89 @@ module.exports = {
      },
      'reduce' : function (key, values) {
        return true;
+     }
+   },
+   'agg_centre' : {
+     'map' : function(doc) {
+       if (doc.circonscription && 
+           doc.circonscription.code && 
+           doc.delegation && 
+           doc.delegation.code && 
+           doc.centre_vote && 
+           doc.centre_vote.code && 
+           doc.resultat &&
+           doc.resultat.listes &&
+           (doc.resultat.listes.length != 0)) {
+             for (var i=0; i < doc.resultat.listes.length; i++) {
+               if (doc.resultat.listes[i].name &&
+                   doc.resultat.listes[i].vote) {
+                     emit([
+                       doc.circonscription.code,
+                       doc.delegation.code, 
+                       doc.centre_vote.code, 
+                       doc.resultat.listes[i].name
+                       ], 
+                       doc.resultat.listes[i].vote
+                     );
+               }
+             }
+           }
+     },
+     'reduce' : function (key, values) {
+       return sum(values);
+     }
+   },
+   'agg_delegation' : {
+     'map' : function(doc) {
+       if (doc.circonscription && 
+           doc.circonscription.code && 
+           doc.delegation && 
+           doc.delegation.code && 
+           doc.resultat &&
+           doc.resultat.listes &&
+           (doc.resultat.listes.length != 0)) {
+             for (var i=0; i < doc.resultat.listes.length; i++) {
+               if (doc.resultat.listes[i].name &&
+                   doc.resultat.listes[i].vote) {
+                     emit([
+                       doc.circonscription.code,
+                       doc.delegation.code, 
+                       doc.resultat.listes[i].name
+                       ], 
+                       doc.resultat.listes[i].vote
+                     );
+               }
+             }
+           }
+     },
+     'reduce' : function (key, values) {
+       return sum(values);
+     }
+   },
+   'agg_circonscription' : {
+     'map' : function(doc) {
+       if (doc.circonscription && 
+           doc.circonscription.code && 
+           doc.resultat &&
+           doc.resultat.listes &&
+           (doc.resultat.listes.length != 0)) {
+             for (var i=0; i < doc.resultat.listes.length; i++) {
+               if (doc.resultat.listes[i].name &&
+                   doc.resultat.listes[i].vote) {
+                     emit([
+                       doc.circonscription.code,
+                       doc.delegation.code, 
+                       doc.centre_vote.code, 
+                       doc.resultat.listes[i].name
+                       ], 
+                       doc.resultat.listes[i].vote
+                     );
+               }
+             }
+           }
+     },
+     'reduce' : function (key, values) {
+       return sum(values);
      }
    },
    'all_apis' : {
