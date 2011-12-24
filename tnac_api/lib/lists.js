@@ -128,7 +128,6 @@ module.exports = {
       
       while(row = getRow()) { 
         var key = row.key;
-        log("key = " + key);
 	if (typeof(key) === "object" && Array.isArray(key)) {
             fn_build_result_list(rtn, key, row.value );
         }
