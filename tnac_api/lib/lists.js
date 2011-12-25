@@ -49,16 +49,19 @@ var fn_tojson_format = function(index1, index2, array_name, element_name, name1,
       send (toJSON(rtn));
 };
 
+var fn_sort_list = function(list) {
+      var sorted_list = list.sort(function (a,b) {
+                                        return b.vote - a.vote;
+                                      }
+                                    );
+      list = sorted_list;
+}
+
 module.exports = {
     'bureau_vote_json' : function (head,req) {
       fn_setcharset();
       var row = getRow(); 
-      var listes = row.doc.resultat.listes;
-      var sorted_listes = listes.sort(function (a,b) {
-                                        return b.vote - a.vote;
-                                      }
-                                    );
-      row.doc.resultat.listes = sorted_listes;
+      fn_sort_list(row.doc.resultat.listes);
       delete row.doc._id;
       delete row.doc._rev;
       delete row.doc.circonscription;
@@ -144,6 +147,7 @@ module.exports = {
             fn_build_result_list(rtn, key, row.value );
         }
       } 
+      fn_sort_list(rtn.resultat.listes);
       send (toJSON(rtn));
     }
 };
