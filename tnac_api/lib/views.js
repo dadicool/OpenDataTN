@@ -172,11 +172,13 @@ module.exports = {
            (doc.resultat.listes.length != 0)) {
              for (var i=0; i < doc.resultat.listes.length; i++) {
                if (doc.resultat.listes[i].name &&
+                   doc.resultat.listes[i].id &&
                    doc.resultat.listes[i].vote) {
                      emit([
                        doc.circonscription.code,
                        doc.delegation.code, 
                        doc.centre_vote.code, 
+                       doc.resultat.listes[i].id,
                        doc.resultat.listes[i].name
                        ], 
                        doc.resultat.listes[i].vote
@@ -200,10 +202,12 @@ module.exports = {
            (doc.resultat.listes.length != 0)) {
              for (var i=0; i < doc.resultat.listes.length; i++) {
                if (doc.resultat.listes[i].name &&
+                   doc.resultat.listes[i].id &&
                    doc.resultat.listes[i].vote) {
                      emit([
                        doc.circonscription.code,
                        doc.delegation.code, 
+                       doc.resultat.listes[i].id,
                        doc.resultat.listes[i].name
                        ], 
                        doc.resultat.listes[i].vote
@@ -225,11 +229,11 @@ module.exports = {
            (doc.resultat.listes.length != 0)) {
              for (var i=0; i < doc.resultat.listes.length; i++) {
                if (doc.resultat.listes[i].name &&
+                   doc.resultat.listes[i].id &&
                    doc.resultat.listes[i].vote) {
                      emit([
                        doc.circonscription.code,
-                       doc.delegation.code, 
-                       doc.centre_vote.code, 
+                       doc.resultat.listes[i].id,
                        doc.resultat.listes[i].name
                        ], 
                        doc.resultat.listes[i].vote
