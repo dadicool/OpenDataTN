@@ -14,20 +14,20 @@ var fn_setcharset = function() {
 
 var fn_build_result_list = function(rtn, key, value) {
       // Given that rtn is an object, the changes below are gonna be reflected in the variable passed in here
-      var name = '';
       var key_length = key.length;
-      if (key_length >= 2 ) {
+      if (key_length >= 3 ) {
           // There is a circonscription field and a list name
-          name = 'circonscription';
-          rtn[name] = key[0];
-      }
-      if (key_length >= 3) {
-          name = 'delegation';
-          rtn[name] = key[1];
+          rtn['circonscription'] = key[0];
       }
       if (key_length >= 4) {
-          name = 'centre';
-          rtn[name] = key[2];
+          rtn['delegation'] = key[1];
+      } else {
+          rtn['delegation'] = "ALL";
+      }
+      if (key_length >= 5) {
+          rtn['centre_vote'] = key[2];
+      } else {
+          rtn['centre_vote'] = "ALL";
       }
       rtn['resultat']['listes'].push({'name' : key[key_length - 1], 'vote': value});
 };
