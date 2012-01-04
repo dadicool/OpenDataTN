@@ -3,7 +3,9 @@ var assert = require('assert');
 var APIeasy = require('api-easy');
 var config = require('./config.js');
 var expectedData = require('./fixtures/tnac_circ.js');
-var expectedCircData = expectedData.circonscriptions;
+
+var expectedCircData = (config.local === true) ? expectedData.circonscriptions_local : expectedData.circonscriptions_all;
+console.log(JSON.stringify(expectedCircData));
 var expectedDelegData = expectedData.delegations;
 var circ_test_id = expectedData.circ_test_id; 
 
@@ -23,6 +25,7 @@ suite.use(config.host, config.port)
         fn_utils.checkAllEntriesCodeName(err, res, body, 'circonscriptions');
     })
     .expect('should provide the expected response', function (err, res, body) {
+console.log(JSON.stringify(expectedCircData));
         assert.deepEqual(expectedCircData, JSON.parse(body));
     })
     .undiscuss()

@@ -1,0 +1,21 @@
+exports.env = {
+    // the default env will be used when you just do "kanso push"
+    'default': {
+        db: 'http://dadicool:momomo@localhost:5984/tnac_dev',
+    },
+    // the default env will be used when you just do "kanso push"
+    'full': {
+        db: 'http://dadicool:momomo@localhost:5984/tnac_full',
+    },
+    // you can also define named environments this one will 
+    // be used when you do "kanso push production"
+    'stage': {
+        db: 'http://dali:MOMOMO6731@184.107.177.107/tnac_2011_stage', 
+        // tells the module package to minify modules.js
+        minify: true,
+        // useful when running behind a virtual host and 
+        // you want to force the baseURL to something
+        //baseURL: '/foo'
+    }
+};
+
