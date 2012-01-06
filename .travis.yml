@@ -4,6 +4,7 @@ node_js:
 
 branches:
   only:
+    - new_api_layout
     - tnac_api_kanso
     - master
 
