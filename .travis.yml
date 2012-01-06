@@ -4,9 +4,9 @@ node_js:
 
 branches:
   only:
-    - new_api_layout
+#    - new_api_layout
     - tnac_api_kanso
     - master
 
 before_script:
-  - sh -c "cd tnac_api; ../node_modules/.bin/kanso push; ../node_modules/.bin/kanso upload data"
+  - sh -c "cd tnac_api; ../node_modules/.bin/kanso push default; ../node_modules/.bin/kanso upload data"
