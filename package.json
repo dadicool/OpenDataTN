@@ -1,6 +1,6 @@
 {
-  "name": "tnac-api-tests",
-  "description": "Test tnelec results rest api",
+  "name": "opendatatn-api-tests",
+  "description": "OpenDataTN Tests for rest api",
   "version": "0.0.1",
   "repository": {
     "type": "git",
@@ -8,6 +8,7 @@
   },
   "keywords": ["tnac","test","rest","json"],
   "dependencies": {
+    "kanso" : ">= 0.1.2",
     "pkginfo" : "0.2.x",
     "request" : "2.x.x",
     "vows"    : "0.6.x",

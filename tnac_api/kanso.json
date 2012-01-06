@@ -12,6 +12,7 @@
         "base_template": "base.html"
     },
     "dependencies": {
+        "async": null,
         "modules": null,
         "properties": null,
         "attachments": null,

@@ -6,3 +6,6 @@ branches:
   only:
     - tnac_api_kanso
     - master
+
+before_script:
+  - sh -c "cd tnac_api; kanso push; kanso upload data"
