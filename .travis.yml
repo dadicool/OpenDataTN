@@ -9,4 +9,4 @@ branches:
     - master
 
 before_script:
-  - sh -c "cd tnac_api; ../node_modules/.bin/kanso install; ../node_modules/.bin/kanso push default; ../node_modules/.bin/kanso upload data default"
+  - sh -c "cd tnac_api; ../node_modules/.bin/kanso install;../node_modules/.bin/kanso upload data default; ../node_modules/.bin/kanso push default "
