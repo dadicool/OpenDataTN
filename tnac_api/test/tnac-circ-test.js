@@ -15,7 +15,7 @@ var suite = APIeasy.describe('tnac_circonscription');
 
 suite.use(config.host, config.port)
     .discuss('When asking for the list of circonscriptions')
-    .path('/tnac/v1/meta')
+    .path(config.base_path + '/v1/meta')
     .get('/')
     .expect(200)
     .expect('should respond with at least one circonscription', function (err, res, body) {

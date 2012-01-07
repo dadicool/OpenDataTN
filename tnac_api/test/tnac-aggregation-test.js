@@ -17,7 +17,7 @@ var suite = APIeasy.describe('tnac_bureau');
 
 suite.use(config.host, config.port)
     .discuss('When asking for the aggregated results for a specific centre')
-    .path('/tnac/v1/vote')
+    .path(config.base_path + '/v1/vote')
     .get('/'+ circ_test_id + '/' + deleg_test_id + '/' + centre_test_id)
     .expect(200)
     .expect('should respond with exactly one centre', function (err, res, body) {
@@ -47,7 +47,7 @@ suite.use(config.host, config.port)
     .undiscuss()
     .unpath()
     .discuss('When asking for the aggregated results for a specific delegation')
-    .path('/tnac/v1/vote')
+    .path(config.base_path + '/v1/vote')
     .get('/'+ circ_test_id + '/' + deleg_test_id )
     .expect(200)
     .expect('should respond with exactly one delegation', function (err, res, body) {
@@ -77,7 +77,7 @@ suite.use(config.host, config.port)
     .undiscuss()
     .unpath()
     .discuss('When asking for the aggregated results for a specific circonscription')
-    .path('/tnac/v1/vote')
+    .path(config.base_path + '/v1/vote')
     .get('/'+ circ_test_id )
     .expect(200)
     .expect('should respond with exactly one circonscription', function (err, res, body) {

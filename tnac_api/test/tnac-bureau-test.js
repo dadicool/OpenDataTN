@@ -17,7 +17,7 @@ var suite = APIeasy.describe('tnac_bureau');
 
 suite.use(config.host, config.port)
     .discuss('When asking for the results for a specific bureau')
-    .path('/tnac/v1/vote')
+    .path(config.base_path + '/v1/vote')
     .get('/'+ circ_test_id + '/' + deleg_test_id + '/' + centre_test_id + '/' + bureau_test_id)
     .expect(200)
     .expect('should respond with exactly one bureau', function (err, res, body) {
@@ -47,7 +47,7 @@ suite.use(config.host, config.port)
     .undiscuss()
     .discuss('When asking for the metadata for a specific bureau')
     .unpath()
-    .path('/tnac/v1/meta')
+    .path(config.base_path + '/v1/meta')
     .get('/'+ circ_test_id + '/' + deleg_test_id + '/' + centre_test_id + '/' + bureau_test_id)
     .expect(200)
     .expect('should respond with exactly one set of metadata', function (err, res, body) {

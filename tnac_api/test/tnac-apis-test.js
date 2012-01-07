@@ -9,7 +9,7 @@ var suite = APIeasy.describe('tnac_api');
 
 suite.use(config.host, config.port)
     .discuss('When asking for the list of api versions supported')
-    .path('/tnac')
+    .path(config.base_path+ '/')
     .get()
     .expect(200)
     .expect('should respond with at least one api', function (err, res, body) {
