@@ -10,7 +10,12 @@ config_prod.port = 80;
 
 var config = {};
 
-if (typeof(config_local) === 'undefined') {
+if (typeof(process.env.LOCAL_RUN) !== 'undefined') {
+    config_local = require ('./config_local.js.template');
+    config.host = config_local.host;
+    config.port = config_local.port;
+    config.local = true;
+} else if (typeof(config_local) === 'undefined') {
     config.host = config_prod.host;
     config.port = config_prod.port;
 } else {
