@@ -9,7 +9,7 @@ var suite = APIeasy.describe('tn_datasets_api');
 
 suite.use(config.host, config.port)
     .discuss('get api')
-    .path('/api')
+    .path(config.base_path + '/')
     .get()
     .expect(200)
     .expect('datasets must contain tnac dataset', function (err, res, body) {

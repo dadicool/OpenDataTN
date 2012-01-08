@@ -3,6 +3,5 @@ var config_local = {};
 config_local.host = "api.opendatatn.local";
 config_local.port = 5984;
 config_local.base_path = "/tnac";
-config_local.base_path = "";
 
 module.exports = config_local;
